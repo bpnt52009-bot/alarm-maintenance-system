@@ -39,7 +39,7 @@
 | 📥 Export CSV | ส่งออก Machines / Alarms / Maintenance เป็นไฟล์ CSV |
 
 **Automation (Trigger ใน Supabase)**
-- สร้าง `profiles` อัตโนมัติเมื่อมีผู้ใช้ใหม่สมัครเข้าระบบ
+- สร้าง `profiles` อัตโนมัติเมื่อมีผู้ใช้ใหม่สมัครเข้าระบบ — **ผู้ใช้คนแรกได้ role `Admin`** ส่วนคนถัดไปได้ `Technician`
 - ซิงก์สถานะเครื่องจักรอัตโนมัติ ตาม Alarm / งานซ่อมที่ค้างอยู่
 
 ---
@@ -49,7 +49,7 @@
 | ชั้น | เทคโนโลยี |
 | --- | --- |
 | Frontend | Next.js 15, React 19, Tailwind CSS |
-| UI Components | Recharts (Pie/Barchart) |
+| UI Components | Recharts (Pie Chart) |
 | Backend-as-a-Service | Supabase (PostgreSQL, Auth, Realtime, RLS) |
 | Language | JavaScript (ES2022) + JSX |
 | CI/CD | GitHub Actions |
@@ -134,7 +134,7 @@ create table public.maintenance_records (
 ```sql
 -- ทุกคนที่ login เห็นเครื่องจักรได้
 create policy "machines_select" on public.machines
-  for select to authenticated using (public.is_authenticated());
+  for select to authenticated using (true);
 
 -- เฉพาะ Admin เพิ่ม/แก้ไข/ลบเครื่องจักร
 create policy "machines_insert_admin" on public.machines
@@ -189,8 +189,8 @@ npm run build  # สร้าง production build
 
 1. เปิดหน้า `http://localhost:3000/login`
 2. กดแท็บ **สมัครสมาชิก** และกรอกอีเมล + รหัสผ่าน
-3. ผู้ใช้ใหม่มี role = **Technician** อัตโนมัติ
-4. (สำหรับทดสอบ Admin) ให้แก้ role ในตาราง `profiles` ด้วย Supabase Dashboard
+3. **ผู้ใช้คนแรก** ที่สมัครจะได้ role = **Admin** อัตโนมัติ (คนถัดไปได้ Technician)
+4. (ถ้าต้องการ Admin เพิ่มอีก) ให้แก้ role ในตาราง `profiles` ด้วย Supabase Dashboard
    หรือใช้ SQL: `update public.profiles set role='Admin' where email='...';`
 5. กลับมาเข้าสู่ระบบใหม่เพื่อยืนยันสิทธิ์
 

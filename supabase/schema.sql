@@ -69,15 +69,23 @@ create table if not exists public.maintenance_records (
 -- ---------------------------------------------------------------------------
 
 -- 5.1 สร้าง Record ใน profiles อัตโนมัติเมื่อมี User ใหม่ Signup/Login
+--     ผู้ใช้คนแรกของระบบได้ role 'Admin' ส่วนคนถัดไปได้ 'Technician'
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
 security definer
 set search_path = public
 as $$
+declare
+  v_role text;
 begin
+  select case
+    when not exists (select 1 from public.profiles) then 'Admin'
+    else 'Technician'
+  end into v_role;
+
   insert into public.profiles (id, email, role)
-  values (new.id, new.email, 'Technician')
+  values (new.id, new.email, v_role)
   on conflict (id) do nothing;
   return new;
 end;

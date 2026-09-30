@@ -140,8 +140,8 @@ export default function LoginPage() {
           <div className="mt-6 rounded-md bg-blue-50 p-3 text-xs text-blue-800">
             <p className="mb-1 font-semibold">💡 วิธีเริ่มต้นใช้งาน</p>
             <p>
-              สมัครสมาชิกใหม่ → role เป็น <b>Technician</b> อัตโนมัติ
-              (Admin ต้องตั้ง role ให้อีกครั้งในตาราง <code>profiles</code>).
+              สมัครสมาชิก → <b>ผู้ใช้คนแรกได้ role Admin</b> คนถัดไปได้ Technician
+              (Admin จัดการเครื่องจักรได้ทั้งหมด).
             </p>
           </div>
         </div>

@@ -14,6 +14,7 @@ export default function DashboardPage() {
   const [machines, setMachines] = useState([]);
   const [alarms, setAlarms] = useState([]);
   const [maintenance, setMaintenance] = useState([]);
+  const [openAlarms, setOpenAlarms] = useState(0);
 
   useEffect(() => {
     fetchDashboard();
@@ -21,7 +22,7 @@ export default function DashboardPage() {
 
   const fetchDashboard = async () => {
     setLoading(true);
-    const [mRes, aRes, mtRes] = await Promise.all([
+    const [mRes, aRes, mtRes, openRes] = await Promise.all([
       supabase.from("machines").select("*").order("created_at", { ascending: true }),
       supabase
         .from("alarms")
@@ -32,10 +33,15 @@ export default function DashboardPage() {
         .from("maintenance_records")
         .select("*")
         .order("date", { ascending: false }),
+      supabase
+        .from("alarms")
+        .select("id", { count: "exact", head: true })
+        .in("status", ["Open", "In Progress"]),
     ]);
     setMachines(mRes.data ?? []);
     setAlarms(aRes.data ?? []);
     setMaintenance(mtRes.data ?? []);
+    setOpenAlarms(openRes.count ?? 0);
     setLoading(false);
   };
 
@@ -47,10 +53,6 @@ export default function DashboardPage() {
     });
     return base;
   }, [machines]);
-
-  const openAlarms = useMemo(() => {
-    return alarms.length; // ใช้ดูตามข้อมูลล่าสุดที่โหลด (สามารถปรับเป็น count query ได้)
-  }, [alarms]);
 
   return (
     <ProtectedRoute>
