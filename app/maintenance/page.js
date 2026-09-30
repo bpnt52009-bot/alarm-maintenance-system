@@ -184,8 +184,8 @@ export default function MaintenancePage() {
       <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-xl font-bold text-slate-900">งานซ่อมบำรุง (Maintenance)</h1>
-            <p className="mt-1 text-sm text-slate-500">
+            <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">งานซ่อมบำรุง (Maintenance)</h1>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
               บันทึกและจัดการงานซ่อมบำรุงของเครื่องจักร
               {isAdminUser
                 ? " (Admin: จัดการได้ทั้งหมด)"
@@ -291,7 +291,7 @@ export default function MaintenancePage() {
       <div className="card overflow-x-auto">
         <table className="w-full min-w-[900px]">
           <thead>
-            <tr className="border-b border-slate-200 bg-slate-50">
+            <tr className="border-b border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-700/40">
               <th className="th">เครื่องจักร</th>
               <th className="th">ประเภทงาน</th>
               <th className="th">ปัญหา/อาการ</th>
@@ -317,9 +317,9 @@ export default function MaintenancePage() {
               </tr>
             ) : (
               filtered.map((r) => (
-                <tr key={r.id} className="border-t border-slate-100 hover:bg-slate-50">
+                <tr key={r.id} className="border-t border-slate-100 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-700/40">
                   <td className="td">
-                    <div className="text-sm font-medium text-slate-800">
+                    <div className="text-sm font-medium text-slate-800 dark:text-slate-200">
                       {r.machines?.machine_name ?? "-"}
                     </div>
                     <div className="text-xs text-slate-400">
@@ -361,14 +361,14 @@ export default function MaintenancePage() {
       {/* Modal แบบฟอร์มเพิ่ม/แก้ไข */}
       {showForm && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/40 p-4">
-          <div className="w-full max-w-lg rounded-lg bg-white p-6 shadow-xl">
+          <div className="w-full max-w-lg rounded-lg bg-white p-6 shadow-xl dark:bg-slate-800">
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-slate-900">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
                 {editing ? "แก้ไขงานซ่อมบำรุง" : "บันทึกงานซ่อมบำรุง"}
               </h2>
               <button
                 onClick={() => setShowForm(false)}
-                className="text-slate-400 hover:text-slate-600"
+                className="text-slate-400 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
               >
                 ✕
               </button>

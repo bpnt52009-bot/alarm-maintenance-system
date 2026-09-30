@@ -16,8 +16,8 @@ export default function ProtectedRoute({ children }) {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-100">
-        <div className="flex flex-col items-center gap-3 text-slate-600">
+      <div className="flex min-h-screen items-center justify-center bg-slate-100 dark:bg-slate-900">
+        <div className="flex flex-col items-center gap-3 text-slate-600 dark:text-slate-300">
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-300 border-t-blue-600" />
           <p className="text-sm">กำลังโหลด...</p>
         </div>

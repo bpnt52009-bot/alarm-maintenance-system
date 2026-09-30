@@ -173,8 +173,8 @@ export default function MachinesPage() {
       <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-xl font-bold text-slate-900">เครื่องจักร (Machines)</h1>
-            <p className="mt-1 text-sm text-slate-500">
+            <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">เครื่องจักร (Machines)</h1>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
               จัดการข้อมูล Master เครื่องจักรทั้งหมด
               {isAdminUser ? " (Admin: เพิ่ม/แก้ไข/ลบได้)" : " (Technician: ดูได้เท่านั้น)"}
             </p>
@@ -278,11 +278,11 @@ export default function MachinesPage() {
                 </tr>
               ) : (
                 filtered.map((m) => (
-                  <tr key={m.id} className="border-t border-slate-100 hover:bg-slate-50">
-                    <td className="td font-mono text-xs font-semibold text-slate-800">
+                  <tr key={m.id} className="border-t border-slate-100 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-700/40">
+                    <td className="td font-mono text-xs font-semibold text-slate-800 dark:text-slate-200">
                       {m.machine_id}
                     </td>
-                    <td className="td font-medium text-slate-800">{m.machine_name}</td>
+                    <td className="td font-medium text-slate-800 dark:text-slate-200">{m.machine_name}</td>
                     <td className="td">{m.machine_type}</td>
                     <td className="td">{m.location}</td>
                     <td className="td">
@@ -317,14 +317,14 @@ export default function MachinesPage() {
         {/* Modal เพิ่ม/แก้ไข */}
         {showForm && (
           <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/40 p-4">
-            <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
+            <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-slate-800">
               <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-lg font-bold text-slate-900">
+                <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
                   {editing ? "แก้ไขเครื่องจักร" : "เพิ่มเครื่องจักร"}
                 </h2>
                 <button
                   onClick={() => setShowForm(false)}
-                  className="text-slate-400 hover:text-slate-600"
+                  className="text-slate-400 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
                 >
                   ✕
                 </button>
@@ -339,7 +339,7 @@ export default function MachinesPage() {
                     disabled={!!editing}
                     onChange={(e) => setForm({ ...form, machine_id: e.target.value })}
                     placeholder="เช่น MACH-001"
-                    className={`input ${editing ? "bg-slate-100" : ""} ${
+                    className={`input ${editing ? "bg-slate-100 dark:bg-slate-700" : ""} ${
                       errors.machine_id ? "border-red-400" : ""
                     }`}
                   />

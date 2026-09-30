@@ -30,10 +30,10 @@ export function ToastProvider({ children }) {
 function ToastItem({ toast }) {
   const style =
     toast.type === "error"
-      ? "border-red-400 bg-red-50 text-red-800"
+      ? "border-red-400 bg-red-50 text-red-800 dark:border-red-600 dark:bg-red-900/30 dark:text-red-200"
       : toast.type === "info"
-      ? "border-blue-400 bg-blue-50 text-blue-800"
-      : "border-green-400 bg-green-50 text-green-800";
+      ? "border-blue-400 bg-blue-50 text-blue-800 dark:border-blue-600 dark:bg-blue-900/30 dark:text-blue-200"
+      : "border-green-400 bg-green-50 text-green-800 dark:border-green-600 dark:bg-green-900/30 dark:text-green-200";
 
   const mark =
     toast.type === "error" ? "✕" : toast.type === "info" ? "ℹ" : "✓";

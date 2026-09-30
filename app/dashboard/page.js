@@ -64,32 +64,32 @@ export default function DashboardPage() {
             title="เครื่องจักรทั้งหมด"
             value={machines.length}
             icon="🏭"
-            color="bg-blue-50 text-blue-700"
+            color="bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
           />
           <StatCard
             title="สถานะ Alarm"
             value={statusCounts.Alarm}
             icon="🚨"
-            color="bg-red-50 text-red-700"
+            color="bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300"
           />
           <StatCard
             title="สถานะ Maintenance"
             value={statusCounts.Maintenance}
             icon="🔧"
-            color="bg-amber-50 text-amber-700"
+            color="bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300"
           />
           <StatCard
             title="อัลาร์มที่ยังไม่ปิด"
             value={openAlarms}
             icon="📟"
-            color="bg-purple-50 text-purple-700"
+            color="bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300"
           />
         </section>
 
         {/* ชาร์ต + อัลาร์มล่าสุด */}
         <div className="grid gap-6 lg:grid-cols-3">
           <section className="card p-5 lg:col-span-2">
-            <h2 className="mb-4 text-base font-semibold text-slate-900">
+            <h2 className="mb-4 text-base font-semibold text-slate-900 dark:text-slate-100">
               สถานะเครื่องจักร
             </h2>
             <MachineStatusChart data={machines} />
@@ -97,7 +97,7 @@ export default function DashboardPage() {
 
           <section className="card p-5">
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="text-base font-semibold text-slate-900">
+              <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
                 อัลาร์มล่าสุด
               </h2>
               <Link
@@ -116,15 +116,15 @@ export default function DashboardPage() {
                 {alarms.map((a) => (
                   <li
                     key={a.id}
-                    className="rounded-md border border-slate-200 p-3"
+                    className="rounded-md border border-slate-200 p-3 dark:border-slate-700"
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="font-mono text-xs font-semibold text-slate-700">
+                      <span className="font-mono text-xs font-semibold text-slate-700 dark:text-slate-200">
                         {a.alarm_code}
                       </span>
                       <StatusBadge value={a.status} />
                     </div>
-                    <p className="mt-1 text-sm text-slate-600">
+                    <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
                       {a.alarm_description}
                     </p>
                     <p className="mt-1 text-xs text-slate-400">
@@ -143,8 +143,8 @@ export default function DashboardPage() {
 
         {/* ตารางงานซ่อมล่าสุด */}
         <section className="card mt-6 overflow-hidden">
-          <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
-            <h2 className="text-base font-semibold text-slate-900">
+          <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-700">
+            <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
               งานซ่อมบำรุงล่าสุด
             </h2>
             <div className="flex gap-2">
@@ -169,8 +169,8 @@ export default function DashboardPage() {
             </div>
           </div>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-200">
-              <thead className="bg-slate-50">
+            <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+              <thead className="bg-slate-50 dark:bg-slate-700/40">
                 <tr>
                   <th className="th">เครื่องจักร</th>
                   <th className="th">ประเภท</th>
@@ -180,7 +180,7 @@ export default function DashboardPage() {
                   <th className="th">สถานะ</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
                 {maintenance.slice(0, 6).map((r) => (
                   <tr key={r.id}>
                     <td className="td">
@@ -221,8 +221,10 @@ function StatCard({ title, value, icon, color }) {
         {icon}
       </div>
       <div>
-        <div className="text-2xl font-bold text-slate-900">{value}</div>
-        <div className="text-sm text-slate-500">{title}</div>
+        <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+          {value}
+        </div>
+        <div className="text-sm text-slate-500 dark:text-slate-400">{title}</div>
       </div>
     </div>
   );
